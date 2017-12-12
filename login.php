@@ -25,6 +25,7 @@ $(document).ready(function(){
 
 		$.post({
 			url:"main.php",
+			dataType:"json",
 			data:{
 				usuario: $("#usuario").val(),
 				senha: $("#senha").val(),
@@ -32,7 +33,7 @@ $(document).ready(function(){
 			},
 			success: function(data){
 				if(data.status == "aprovado"){
-					alert("sucesso");
+					window.location = "admin/"+data.id;
 				}else{
 					alert("usuário ou senha inválidos. tente novamente.");
 				}

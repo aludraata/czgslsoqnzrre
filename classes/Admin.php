@@ -32,14 +32,18 @@
 			$resultado = $stmt->fetch();
 
 			if(is_null($resultado) or empty($resultado)){
-				return false;
+				return json_encode(array('status' => 'negado',
+										'flag'	  => 1));
 			}else{
 				$senhaBanco = $resultado->senha;
-
+				$teste = password_verify($senha,$senhaBanco);
 				if(password_verify($senha,$senhaBanco)){
-					return true;
+					session_start();
+					$_SESSION['idAdmin'] = $resultado->id;
+					return json_encode(array('id' => $resultado->id,
+											'status' => 'aprovado'));
 				}else{
-					return false;
+					return json_encode(array('status' => 'negado'));
 				}
 			}
 		}

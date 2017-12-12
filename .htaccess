@@ -1,0 +1,15 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+RewriteRule ^(login+)$ login.php [QSA,L]
+RewriteRule ^admin/([0-9]+) Admin.php?id=$1
+
+RewriteRule ^admin\/cadastrar\/usuario/([0-9]+) cadastroUsario.php?id=$1 
+RewriteRule ^admin\/lista\/usuarios/([0-9]+) listaUsuarios.php?idAdmin=$1 
+
+RewriteRule ^admin\/edita\/usuario/([0-9]+)/([0-9]+)/([a-z]+) editaUsuario.php?idAdmin=$1&idUsuario=$2&nomeUsuario=$3 
+
+RewriteRule ^cadastrar\/imagem/([0-9]+) cadastraImagem.php?id=$1 
