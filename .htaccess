@@ -12,4 +12,7 @@ RewriteRule ^admin\/lista\/usuarios/([0-9]+) listaUsuarios.php?idAdmin=$1
 
 RewriteRule ^admin\/edita\/usuario/([0-9]+)/([0-9]+)/([a-z]+) editaUsuario.php?idAdmin=$1&idUsuario=$2&nomeUsuario=$3 
 
+RewriteRule ^editar\/imagem/([0-9]+)/([0-9]+)/([a-z]+) editarImagem.php?idAdmin=$1&idImagem=$2&nomeImagem=$3 
+
 RewriteRule ^cadastrar\/imagem/([0-9]+) cadastraImagem.php?id=$1 
+RewriteRule ^lista\/imagem/([0-9]+) listaImagens.php?id=$1 

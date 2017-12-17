@@ -16,6 +16,7 @@
 <li><a href="cadastrar/usuario/<?php echo $id;?>">Cadastrar usuário</a> </li>
 <li><a href="lista/usuarios/<?php echo $id;?>">Editar usuário</a> </li>
 <li><a href="/compusoftware/cadastrar/imagem/<?php echo $id;?>">Cadastrar imagem</a></li>
+<li><a href="/compusoftware/lista/imagem/<?php echo $id;?>">Editar imagem</a></li>
 </ul>
 </body>
 </html>

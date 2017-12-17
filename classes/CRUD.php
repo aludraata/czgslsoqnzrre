@@ -9,7 +9,7 @@
 		abstract public function update($id);
 
 		public function busca($id){
-			$sql = "SELECT * FROM $this->tabela WHERE id = :id";
+			$sql = "SELECT * FROM $this->tabela WHERE id_$this->tabela = :id";
 			$stmt = BD::prepare($sql);
 			$stmt->bindParam(':id',$id,PDO::PARAM_INT);
 			$stmt->execute();

@@ -44,19 +44,24 @@
 
 			$resultado = $stmt->fetch();
 			if($resultado->ativo_usuario != 1){
-				return false;
+				$resultadoJson = array("status" => "fracasso");
 			}
 			if(is_null($resultado) or empty($resultado)){
-				return false;
+				$resultadoJson = array("status" => "fracasso");
 			}else{
-				$senhaBanco = $resultado->senha;
+				$senhaBanco = $resultado->senha_usuario;
 
 				if(password_verify($senha,$senhaBanco)){
-					return true;
+					session_start();
+					$_SESSION['idAdmin'] = $resultado->id_usuario;
+					$resultadoJson = array("status" => "sucesso",
+											"id"	=> $resultado->id_usuario);
 				}else{
-					return false;
+					$resultadoJson = array("status" => "fracasso");
 				}
 			}
+
+			return json_encode($resultadoJson);
 		}
 
 		public function selecionaTodos(){

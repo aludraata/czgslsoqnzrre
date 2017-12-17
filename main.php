@@ -1,17 +1,18 @@
 <?php
 	require_once("classes/Admin.php");
 	require_once("classes/Usuario.php");
-	
+	require_once("classes/Imagem.php");
+	require_once("classes/Categoria.php");
 
 	$acao = $_POST['acao'];
 
 	if($acao == 'login'){
-		$admin = new Admin();
+		$usuario = new Usuario();
 
 		$login = $_POST['usuario'];
 		$senha = $_POST['senha'];
 
-		echo $admin->login($login,$senha);
+		echo $usuario->login($login,$senha);
 
 		
 	}elseif($acao == 'cadastraUsuario'){
@@ -66,5 +67,54 @@
 			echo json_encode(array("status" => "fracasso"));
 		}
 
+	}elseif($acao == 'cadastrarImagem'){
+		date_default_timezone_set("Brazil/East"); //Definindo timezone padrão
+
+		$ext = strtolower(substr($_FILES['foto']['name'],-4)); //Pegando extensão do arquivo
+		$new_name = date("Y.m.d-H.i.s") . $ext; //Definindo um novo nome para o arquivo
+		$dir = 'imagens/'; //Diretório para uploads
+
+		move_uploaded_file($_FILES['foto']['tmp_name'], $dir.$new_name); //Fazer upload do arquivo
+
+		$imagem = new Imagem();
+
+		$idCategoria 	= $_POST['idCategoria'];
+		$nome 			= $_POST['nome'];
+		$caminho = $new_name;
+
+		$imagem->setIdCategoria($idCategoria);
+		$imagem->setCaminho($caminho);
+		$imagem->setNome($nome);
+
+		if($imagem->insert()){
+			echo json_encode(array("status" => "sucesso"));
+		}else{
+			echo json_encode(array("status" => "fracasso"));
+		}
+	}elseif($acao == "listaImagens"){
+		$imagem = new Imagem();
+		echo $imagem->selecionaTudo();
+	}elseif($acao == "mostraImagem"){
+		$imagem = new Imagem();
+		$id = $_POST['id'];
+
+		echo $imagem->seleciona($id);
+	}elseif($acao == "listaCategorias"){
+		$categoria = new Categoria();
+
+		echo $categoria->selecionaTudo();
+	}elseif($acao == "atualizaImagem"){
+		$imagem = new Imagem();
+
+		$nome 			= $_POST['nome'];
+		$idCategoria 	= $_POST['categorias'];
+		$ativo 			= $_POST['ativo'];
+		$idImagem		= $_POST['idImagem'];
+
+		$imagem->setNome($nome);
+		$imagem->setIdCategoria($idCategoria);
+		$imagem->setAtivo($ativo);
+
+		$imagem->update($idImagem);
 	}
 ?>

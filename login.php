@@ -32,7 +32,7 @@ $(document).ready(function(){
 				acao: "login",				
 			},
 			success: function(data){
-				if(data.status == "aprovado"){
+				if(data.status == "sucesso"){
 					window.location = "admin/"+data.id;
 				}else{
 					alert("usuário ou senha inválidos. tente novamente.");

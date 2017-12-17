@@ -30,7 +30,7 @@ $(document).ready(function(){
 		},
 		success: function(data){
 			$.each(data,function(){
-				var nomeUrl = this.nome .toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+				var nomeUrl = this.nome.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
 				$("#listaUsuarios").append("<li> <a href=/compusoftware/admin/edita/usuario/"+idAdmin+"/"+this.id+"/"+nomeUrl+">"+this.nome+"</a></li>");
 			});
 		}
