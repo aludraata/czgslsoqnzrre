@@ -1,0 +1,66 @@
+@font-face {
+	font-family: 'Helvetica';
+	src: url('../fonts/helvetica-regular.otf');
+}
+
+@font-face {
+	font-family: 'Helvetica Bold';
+	src: url('../fonts/helvetica-bold.otf');
+}
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$theme-colors: (
+  "primary": #D04A43
+);
+
+$border-radius:               0rem !default;
+$border-radius-lg:            0rem !default;
+$border-radius-sm:            0rem !default;
+
+$link-color:                $blue !default;
+
+
+@import "bootstrap/bootstrap.scss";
+
+html, body{
+	height: 100%;
+	font-family: 'Helvetica', Arial, sans-serif;
+	
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-weight: bolder;
+}
+
+.admin-login-logo{
+	display: block;
+	margin: 40px 0;
+	max-width: 130px;
+}
+
+.admin-login-tituloPagina{
+	font-size: 1.4rem;
+	text-align: center;
+	margin-bottom: 40px;
+	text-transform: uppercase;
+}
+
+.admin-login-alerta{
+	margin-top: 40px;
+	display: none;
+}
+
+.admin-login-link{
+	text-align: center;
+	margin-top: 40px;
+}
