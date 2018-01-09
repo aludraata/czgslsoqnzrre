@@ -34,18 +34,19 @@
 					<h1 class="admin-login-tituloPagina">Painel Administrativo</h1>
 
 					<!-- Formulário -->
-			    <form action="" method="post">
+			    <form action="../main.php" method="post" id="formLogin">
 				      <div class="form-group">
-				  			<input type="email" class="form-control" id="email" placeholder="Usuário">
+				  			<input type="text" class="form-control" id="usuario" name="usuario" placeholder="Usuário">
 							</div><!-- form-group -->
 
 				      <div class="form-group">
-				  			<input type="password" class="form-control" id="senha" placeholder="Senha">
+				  			<input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
 							</div><!-- form-group -->
 
 				      <div class="form-group">
 				  			<input type="submit" class="btn btn-primary btn-block" id="entrar" name="entrar" value="Entrar">
 							</div><!-- form-group -->
+							<input type="hidden" name="acao" value="login">
 			    </form>
 
 				<p class="admin-login-link"><a href="#" class="btn btn-link">Esqueci minha senha.</a></p>
@@ -54,7 +55,10 @@
 		</div><!-- row -->
   </div><!-- container-fluid -->
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 		<script>
@@ -62,6 +66,25 @@
 				//$("#alerta-erro-login").css('display', 'block');
 			//fechando
 				//$("#alerta-erro-login").alert('close');
+			$(document).ready(function(){
+					$("#formLogin").submit(function(e){
+						e.preventDefault();
+
+						$.ajax({
+							url:"../main.php",
+							type:"POST",
+							dataType:"json",
+							data:$(this).serialize(),
+							success:function(data){
+								if(data.status != 'sucesso'){
+									$("#alerta-erro-login").show();
+								}else{
+									window.location = "../dashboard/"+data.id;
+								}
+							}
+						});
+					});
+			});
 		</script>
   </body>
 </html>

@@ -1,3 +1,13 @@
+
+<?php
+	$id = $_GET['idAdmin'];
+	session_start();
+	if(!isset($_SESSION['idAdmin']) || $_SESSION['idAdmin'] != $id){
+		session_destroy();
+		header('Location: /compusoftware/admin');
+	}
+	
+?>
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -44,7 +54,7 @@
 <ul class="navbar-nav mr-sm-3">
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Fulano de Tal
+		<span id="nome-adm"></span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<a class="dropdown-item" href="#">Meus Dados</a>
@@ -66,7 +76,10 @@
 		</div><!-- row -->
   </div><!-- container-fluid -->
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 		<script>
@@ -74,6 +87,22 @@
 				//$("#alerta-erro-login").css('display', 'block');
 			//fechando
 				//$("#alerta-erro-login").alert('close');
+
+			$(document).ready(function(){
+				$.ajax({
+					url:"../main.php",
+					type:"POST",
+					dataType:"json",
+					data:{
+						acao:"showUsuario",
+						idUsuario:<?php echo $id;?>
+					},
+					success:function(data){
+						$("#nome-adm").append(data.nome);
+						//alert(data.nome);
+					}	
+				});
+			});
 		</script>
   </body>
 </html>

@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-l
 
 RewriteRule ^(login+)$ login.php [QSA,L]
-RewriteRule ^admin/([0-9]+) Admin.php?id=$1
+RewriteRule ^dashboard/([0-9]+) admin/painel.php?idAdmin=$1
 
 RewriteRule ^admin\/cadastrar\/usuario/([0-9]+) cadastroUsario.php?id=$1 
 RewriteRule ^admin\/lista\/usuarios/([0-9]+) listaUsuarios.php?idAdmin=$1 
@@ -16,3 +16,4 @@ RewriteRule ^editar\/imagem/([0-9]+)/([0-9]+)/([a-z]+) editarImagem.php?idAdmin=
 
 RewriteRule ^cadastrar\/imagem/([0-9]+) cadastraImagem.php?id=$1 
 RewriteRule ^lista\/imagem/([0-9]+) listaImagens.php?id=$1 
+
