@@ -17,3 +17,10 @@ RewriteRule ^editar\/imagem/([0-9]+)/([0-9]+)/([a-z]+) editarImagem.php?idAdmin=
 RewriteRule ^cadastrar\/imagem/([0-9]+) cadastraImagem.php?id=$1 
 RewriteRule ^lista\/imagem/([0-9]+) listaImagens.php?id=$1 
 
+RewriteRule ^dashboard\/categoria/([0-9]+) admin/categoria.php?idAdmin=$1
+
+RewriteRule ^dashboard\/categoria/([0-9]+) admin/categoria.php?idAdmin=$1
+
+RewriteRule ^dashboard\/categoria/lista/([0-9]+) admin/listaCategoria.php?idAdmin=$1
+
+RewriteRule ^dashboard\/categoria/cadastrar/([0-9]+) admin/cadastroCategoria.php?idAdmin=$1
