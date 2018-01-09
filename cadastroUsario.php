@@ -4,9 +4,10 @@
 <?php
 $id = $_GET['id'];
 session_start();
+die($_SESSION['idAdmin']);
 if(!isset($_SESSION['idAdmin']) || $_SESSION['idAdmin'] != $id){
 	session_destroy();
-	header('Location: /compusoftware/login');
+	header('Location: /compusoftware/admin');
 }
 ?>
 
