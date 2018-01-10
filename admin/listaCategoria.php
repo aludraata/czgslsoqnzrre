@@ -37,7 +37,7 @@
 	</li>
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Dropdown
+			Editar
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<a class="dropdown-item" href="../cadastrar/<?php echo $id;?>">Cadastrar</a>
@@ -112,7 +112,7 @@
                     },
                     success:function(data){
                         $.each(data,function(){
-                            $("#listaCategorias").append("<li> <a href=#>"+this.nome+"</a></li>");
+                            $("#listaCategorias").append("<li> <a href=../editar/<?php echo $id;?>/"+this.id+">"+this.nome+"</a></li>");
                         });
                        
                     }

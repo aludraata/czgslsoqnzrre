@@ -1,6 +1,7 @@
 
 <?php
-	$id = $_GET['idAdmin'];
+    $id = $_GET['idAdmin'];
+    $idCategoria = $_GET['idCategoria'];
 	session_start();
 	if(!isset($_SESSION['idAdmin']) || $_SESSION['idAdmin'] != $id){
 		session_destroy();
@@ -17,7 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <link rel="stylesheet" href="../../../../assets/css/admin.css">
   </head>
   <body>
 
@@ -37,13 +38,13 @@
 	</li>
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Categorias
+			Editar
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<a class="dropdown-item" href="cadastrar/<?php echo $id;?>">Cadastrar</a>
-			<a class="dropdown-item" href="lista/<?php echo $id;?>">Editar</a>
+			<a class="dropdown-item" href="../../lista/<?php echo $id;?>">Editar</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="../../dashboard/<?php echo $id;?>">Menu Principal</a>
+			<a class="dropdown-item" href="../../../<?php echo $id;?>">Menu Principal</a>
 		</div>
 	</li>
 	<li class="nav-item">
@@ -69,7 +70,40 @@
 	<div class="container-fluid admin-logo" style="height: 100%;">
 		<div class="row">
 			<div class="col-md-12">
+            <div class="container" style="padding-top:80px; ">
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertSuccess" style="display:none;">
+                <strong>Categoria editada com sucesso.</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+             </div>
+             <div class="alert alert-primary alert-dismissible fade show" role="alert" id="alert" style="display:none;">
+                <strong>O campo é obrigatório.</strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+             </div>
 
+         <form id="editCategoria">
+		  <div class="form-group">
+
+        <div class="form-group">
+          <label for="categoria">Categoria</label>
+          <input type="input" class="form-control" id="categoria" name="categoria" placeholder="Categoria">
+       
+        </div>
+		  </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" name="status">
+            <option value=1>Ativo</option>
+            <option value=0>Inativo</option>
+          </select>        
+        </div>
+        <input type="submit" class="btn btn-success" value="Editar">
+		  </div>
+
+		</form>
 
 
 			</div><!-- col-md -->
@@ -90,7 +124,7 @@
 
 			$(document).ready(function(){
 				$.ajax({
-					url:"../../main.php",
+					url:"../../../../main.php",
 					type:"POST",
 					dataType:"json",
 					data:{
@@ -103,6 +137,44 @@
 
 					}	
 				});
+
+                $.ajax({
+                    url:"../../../../main.php",
+                    type:"POST",
+                    dataType:"json",
+                    data:{
+                        acao:"mostraCategoria",
+                        idCategoria:<?php echo $idCategoria;?>
+                    },
+                    success:function(data){
+                        $("#categoria").val(data.nome);
+                    }   
+                });
+
+                $("#editCategoria").on("submit",function(e){
+                    e.preventDefault();
+                    var dados = new FormData($('#editCategoria')[0]);
+                    dados.append('acao','editarCategoria');
+                    dados.append('idCategoria',<?php echo $idCategoria;?>);
+                if($("#categoria").val() != ""){
+                    $.ajax({
+                        url:"../../../../main.php",
+                        type:"POST",
+                        dataType:"json",
+                        processData: false,
+                        contentType: false,
+                        data:dados,
+                        success:function(data){
+                            if(data.status == "sucesso"){
+                                $("#alertSuccess").show();
+                            }
+                        }
+
+                    });
+                }else{
+                    $("#alert").show();
+                }
+                });
 			});
 		</script>
   </body>

@@ -124,5 +124,22 @@
 		$categoria->setNomeCategoria($nome);
 
 		echo $categoria->insert();
+	}elseif($acao == "mostraCategoria"){
+		$idCategoria = $_POST['idCategoria'];
+
+		$categoria = new Categoria();
+
+		echo $categoria->seleciona($idCategoria);
+	}elseif($acao=="editarCategoria"){
+		$categoria = new Categoria();
+
+		$nomeCategoria = $_POST['categoria'];
+		$ativoCategoria = $_POST['status'];
+		$id =$_POST['idCategoria'];
+
+		$categoria->setNomeCategoria($nomeCategoria);
+		$categoria->setAtivoCategoria($ativoCategoria);
+
+		echo $categoria->update($id);
 	}
 ?>
