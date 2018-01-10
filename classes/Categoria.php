@@ -82,5 +82,12 @@
 			return json_encode($resultadoJson);
 		}	
 
+		public function setNomeCategoria($nome_categoria){
+			$this->nome_categoria = $nome_categoria;
+		}
+
+		public function setAtivoCategoria($ativo_categoria){
+			$this->ativo_categoria = $ativo_categoria;
+		}
 	}
 ?>

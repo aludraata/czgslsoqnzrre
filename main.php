@@ -116,5 +116,13 @@
 		$imagem->setAtivo($ativo);
 
 		$imagem->update($idImagem);
+	}elseif($acao=="cadastraCategoria"){
+		$categoria = new Categoria();
+
+		$nome = $_POST['categoria'];
+
+		$categoria->setNomeCategoria($nome);
+
+		echo $categoria->insert();
 	}
 ?>
