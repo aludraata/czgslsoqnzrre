@@ -73,7 +73,7 @@ CREATE TABLE `imagem` (
 
 CREATE TABLE `imagem_categoria` (
   `id_imagem_categoria` int(11) NOT NULL,
-  `nome_categoria` int(11) NOT NULL,
+  `nome_categoria` varchar(60) NOT NULL,
   `data_cadastro_categoria` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ativo_categoria` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
