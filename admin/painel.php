@@ -40,7 +40,7 @@
 			Dropdown
 		</a>
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<a class="dropdown-item" href="#">Action</a>
+			<a class="dropdown-item" href="categoria/<?php echo $id;?>">Categoria</a>
 			<a class="dropdown-item" href="#">Another action</a>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item" href="#">Something else here</a>
@@ -100,6 +100,7 @@
 					success:function(data){
 						$("#nome-adm").append(data.nome);
 						//alert(data.nome);
+
 					}	
 				});
 			});

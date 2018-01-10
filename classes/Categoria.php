@@ -30,7 +30,7 @@
 
 			$stmt->bindParam(':ativo_categoria',$this->ativo_categoria);
 			$stmt->bindParam(':nome_categoria', $this->nome_categoria);
-			$stmt->bindParam(':id',				$this->id);
+			$stmt->bindParam(':id',				$id);
 
 			if($stmt->execute()){
 				return json_encode(array("status" => "sucesso"));
@@ -64,7 +64,7 @@
 		}
 
 		public function seleciona($id){
-			$sql = "SELECT * FROM $this->tabela WHERE id_imagem_categoria = :id_imagem_categoria AND ativo_categoria = 1";
+			$sql = "SELECT * FROM $this->tabela WHERE id_imagem_categoria = :id_imagem_categoria";
 
 			$stmt = BD::prepare($sql);
 
@@ -82,5 +82,12 @@
 			return json_encode($resultadoJson);
 		}	
 
+		public function setNomeCategoria($nome_categoria){
+			$this->nome_categoria = $nome_categoria;
+		}
+
+		public function setAtivoCategoria($ativo_categoria){
+			$this->ativo_categoria = $ativo_categoria;
+		}
 	}
 ?>
